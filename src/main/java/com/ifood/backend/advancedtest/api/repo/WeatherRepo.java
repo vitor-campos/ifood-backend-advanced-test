@@ -1,33 +1,18 @@
 package com.ifood.backend.advancedtest.api.repo;
 
 import com.ifood.backend.advancedtest.api.model.Weather;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.cloud.netflix.feign.FeignClient;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
-@Service
-public class WeatherRepo {
+@FeignClient(name = "services.weather", url = "${services.weather.uri}")
+public interface WeatherRepo {
 
-    @Value("${services.weather.uri}")
-    private String weatherUri;
+    @RequestMapping(method = RequestMethod.GET, value = "${services.weather.paths.city}", consumes = "application/json")
+    Weather getWeatherInfo(@PathVariable("name") String cityName);
 
-    @Value("${services.weather.id}")
-    private String weatherId;
-
-    public Weather getWeatherInfo(String cityName) {
-        String url = weatherUri.concat("?q=" + cityName + "&APPID=" + weatherId);
-        return fetchWeatherAPI(url);
-    }
-
-    public Weather getWeatherInfo(float lat, float lon) {
-        String url = weatherUri.concat("?lat=" + lat + "&lon=" + lon + "&APPID=" + weatherId);
-        return fetchWeatherAPI(url);
-    }
-
-    private Weather fetchWeatherAPI(String url, String... parameters) {
-        RestTemplate restTemplate = new RestTemplate();
-        Weather weather = restTemplate.getForObject(url, Weather.class, parameters, weatherId);
-        return weather;
-    }
+    @RequestMapping(method = RequestMethod.GET, value = "${services.weather.paths.coord}", consumes = "application/json")
+    Weather getWeatherInfo(@PathVariable("lat") float lat, @PathVariable("lon") float lon);
 
 }
