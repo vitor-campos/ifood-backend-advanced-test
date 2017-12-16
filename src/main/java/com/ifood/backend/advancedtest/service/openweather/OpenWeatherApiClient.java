@@ -13,16 +13,12 @@ import org.springframework.cloud.netflix.feign.FeignClient;
 public interface OpenWeatherApiClient extends ApiClient.Api {
 
     @RequestLine("GET ?q={name}&units=metric")
-    @Headers({"Accept: application/json",
-            "Content-Type: application/json"})
-    //@RequestMapping(method = RequestMethod.GET, value = "${services.weather.paths.city}", consumes = "application/json")
+    @Headers({"Accept: application/json", "Content-Type: application/json"})
     Weather getWeatherInfo(@Param("name") String cityName);
 
 
     @RequestLine("GET ?lat={lat}&lon={lon}&units=metric")
-    @Headers({"Accept: application/json",
-            "Content-Type: application/json"})
-    //@RequestMapping(method = RequestMethod.GET, value = "${services.weather.paths.coord}", consumes = "application/json")
+    @Headers({"Accept: application/json", "Content-Type: application/json"})
     Weather getWeatherInfo(@Param("lat") float lat, @Param("lon") float lon);
 
 }
