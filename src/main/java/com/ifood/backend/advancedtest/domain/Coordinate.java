@@ -1,4 +1,4 @@
-package com.ifood.backend.advancedtest.api.model;
+package com.ifood.backend.advancedtest.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
