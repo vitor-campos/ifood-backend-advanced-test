@@ -3,13 +3,19 @@ package com.ifood.backend.advancedtest.service;
 import com.ifood.backend.advancedtest.domain.Category;
 import com.ifood.backend.advancedtest.domain.PlaylistResponse;
 import com.ifood.backend.advancedtest.domain.Weather;
+import com.ifood.backend.advancedtest.exception.WeatherNotFoundException;
 import com.ifood.backend.advancedtest.service.openweather.OpenWeatherApiClient;
 import com.ifood.backend.advancedtest.service.spotify.client.SpotifyPlaylistApiClient;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class TrackSuggestionService {
+
+    private static final Logger logger =
+            LoggerFactory.getLogger(TrackSuggestionService.class);
 
     @Autowired
     SpotifyPlaylistApiClient spotifyPlaylistApiClient;
@@ -17,27 +23,42 @@ public class TrackSuggestionService {
     @Autowired
     OpenWeatherApiClient openWeatherApiClient;
 
-    public PlaylistResponse suggestTracks(String cityName) {
+    public PlaylistResponse suggestTracks(String cityName) throws WeatherNotFoundException {
         Weather weather = openWeatherApiClient.getWeatherInfo(cityName);
+        if (weather == null) {
+            logger.debug("Weather not found for city {}", cityName);
+            throw new WeatherNotFoundException("Weather not found: " + cityName);
+        }
+        logger.debug("Weather found for city {}: {}", cityName, weather);
         return findTracksByWeather(weather);
+
     }
 
     public PlaylistResponse suggestTracks(float lat, float lon) {
         Weather weather = openWeatherApiClient.getWeatherInfo(lat, lon);
+        if (weather == null) {
+            logger.debug("Weather not found for coordinates {}, {}", lat, lon);
+            throw new WeatherNotFoundException("Weather not found: " + lat + "," + lon);
+        }
+        logger.debug("Weather found for coordinates  {}, {}: {}", lat, lon, weather);
+
         return findTracksByWeather(weather);
     }
 
     public PlaylistResponse findTracksByWeather(Weather weather){
         Category category;
-        if (weather.getMain().tempMax >= 30) {
+        logger.debug("Selecting playlist according to temperature: {}", weather.getMain().temp);
+        if (weather.getMain().temp >= 30) {
             category = Category.PARTY;
-        } else if (weather.getMain().tempMax >= 15 && weather.getMain().tempMax < 30) {
+        } else if (weather.getMain().temp >= 15 && weather.getMain().temp < 30) {
             category = Category.POP;
-        } else if (weather.getMain().tempMax >= 10 && weather.getMain().tempMax < 15) {
+        } else if (weather.getMain().temp >= 10 && weather.getMain().temp < 15) {
             category = Category.ROCK;
         } else {
             category = Category.CLASSICAL;
         }
+
+        logger.debug("Selected playlist {} to temperature: {}", category, weather.getMain().temp);
 
         return spotifyPlaylistApiClient.getPlayList("spotify", category.getPlaylistId());
     }

@@ -58,6 +58,18 @@ public class Weather {
         this.coord = coord;
     }
 
+    @Override
+    public String toString() {
+        return "Weather{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", cod=" + cod +
+                ", dt=" + dt +
+                ", main=" + main +
+                ", coord=" + coord +
+                '}';
+    }
+
     public class MainInfo {
         public int id;
         public float temp;
@@ -68,5 +80,16 @@ public class Weather {
 
         @JsonProperty("temp_max")
         public float tempMax;
+
+        @Override
+        public String toString() {
+            return "MainInfo{" +
+                    "id=" + id +
+                    ", temp=" + temp +
+                    ", pressure=" + pressure +
+                    ", tempMin=" + tempMin +
+                    ", tempMax=" + tempMax +
+                    '}';
+        }
     }
 }
