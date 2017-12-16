@@ -32,10 +32,10 @@ public class SpotifyServiceConfiguration {
     @Value("${services.spotify.uri}")
     private String apiUri;
 
-    @Value("${services.spotify.id}")
+    @Value("${services.spotify.token.id}")
     private String clientId;
 
-    @Value("${services.spotify.secret}")
+    @Value("${services.spotify.token.secret}")
     private String clientSecret;
 
     @Value("${services.spotify.timeout}")

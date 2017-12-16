@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Value;
 
 public class SpotifyAuthenticationRequestInterceptor extends RequestInterceptor {
 
+    public static final String AUTHORIZATION_PARAMETER = "Authorization";
+
     @Value("${services.spotify.token.id}")
     private String clientId;
 
@@ -24,7 +26,7 @@ public class SpotifyAuthenticationRequestInterceptor extends RequestInterceptor 
             String clientCredentials = clientId + ":" + clientSecret;
             String authorizationValue = "Basic " + new String(Base64.encodeBase64(clientCredentials.getBytes()));
 
-            template.header("Authorization", authorizationValue);
+            template.header(AUTHORIZATION_PARAMETER, authorizationValue);
             super.apply(template);
         }
 

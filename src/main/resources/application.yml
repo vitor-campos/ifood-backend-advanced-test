@@ -2,6 +2,7 @@ services:
   weather:
     uri: http://api.openweathermap.org/data/2.5/weather
     id: 398b8ddf855a1fb8322da99648fb4ebc
+    timeout: 5000
   spotify:
     token:
       uri: https://accounts.spotify.com
