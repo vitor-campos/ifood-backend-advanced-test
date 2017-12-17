@@ -60,8 +60,10 @@
    __Class com.ifood.backend.advancedtest.exception.GlobalControllerExceptionHandler__
 ## Possible Iprovements
   - Increase unit test coverage
+  - Implement integrated tests
   - Add Hystrix circuit breaker to improve fault tolerance
   - Implement OAuth to improve security
+  - Improve cache storage (using Redis)
 
 
 ## Setup and Usage:
@@ -88,18 +90,23 @@
       timeout: 5000
   ```
   
-  2. Run gradlew command
+  2. Build docker image
   ```bash
-    ./gradlew bootRun
+    ./gradlew build docker
   ```
   
-  3. Test Rest Api
+  3. Start docker container
+  ```bash
+      ./docker run -p 8080:8080 -t com.ifood.backend/ifood-backend-advanced-test
+  ```
+  
+  4. Test Rest Api
   ```http
   http://localhost:8080/playlist?city=Salvador
   http://localhost:8080/playlist?lat=-30.2&lon=-5.3
   ```
   
-  4. Swagger docs
+  5. Swagger docs
   ```http
   http://localhost:8080/swagger-ui.html
    ```
