@@ -1,6 +1,5 @@
 package com.ifood.backend.advancedtest.service.spotify;
 
-import com.google.gson.Gson;
 import com.ifood.backend.advancedtest.exception.ExpiredSessionException;
 import feign.Response;
 import feign.codec.ErrorDecoder;
@@ -13,13 +12,7 @@ public class SpotifyErrorDecoder implements ErrorDecoder {
     private static final Logger logger =
             LoggerFactory.getLogger(SpotifyErrorDecoder.class);
 
-    private static final Gson GSON = new Gson();
-
-    private static final int BAD_REQUEST = 400;
     private static final int UNAUTHORIZED = 401;
-    private static final int FORBIDDEN = 403;
-    private static final int NOT_FOUND = 404;
-    private static final int CONFLICT = 409;
 
     @Autowired
     SpotifyApiAuthenticationService spotifyApiAuthenticationService;

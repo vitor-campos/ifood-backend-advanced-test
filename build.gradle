@@ -59,6 +59,10 @@ dependencies {
 	//Logging dependencines
 	compile 'org.slf4j:jcl-over-slf4j:1.7.12'
 
+	//  Powermock
+	compile 'org.powermock:powermock-module-junit4:1.6.6'
+	compile 'org.powermock:powermock-api-mockito:1.6.6'
+
 	//Other dependencies
 	compile group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: '2.9.3'
 
