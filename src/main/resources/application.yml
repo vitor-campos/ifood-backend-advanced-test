@@ -1,3 +1,7 @@
+security:
+  username: user
+  password: passwd123@
+
 services:
   weather:
     uri: http://api.openweathermap.org/data/2.5/weather

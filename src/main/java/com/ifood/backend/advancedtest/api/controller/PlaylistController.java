@@ -6,6 +6,7 @@ import com.ifood.backend.advancedtest.domain.PlaylistResponse;
 import com.ifood.backend.advancedtest.exception.NotFoundException;
 import com.ifood.backend.advancedtest.service.TrackSuggestionService;
 import com.ifood.backend.advancedtest.service.spotify.SpotifyErrorDecoder;
+import org.apache.commons.lang.ArrayUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.TypeMismatchException;
@@ -30,13 +31,18 @@ public class PlaylistController {
     @Autowired
     TrackSuggestionService trackSuggestionService;
 
-    @RequestMapping(method = RequestMethod.GET, produces={"application/json"}, params={"name"})
+    @RequestMapping(method = RequestMethod.GET, produces={"application/json"}, params={"city"})
     @ResponseStatus(HttpStatus.OK)
-    public @ResponseBody PlaylistResponse searchByName(@Valid
-                                                           @Pattern(regexp = Patterns.CITY_NAME_PATTERN_REGEX, message = INVALID_VALUE_MESSAGE)
-                                                           @RequestParam(value = "name") String cityName) {
+    public @ResponseBody PlaylistResponse searchByCityName(@Valid
+                                                           @RequestParam(value = "city") String cityName)
+                                                            throws NotFoundException, BadRequestException,
+                                                                    NumberFormatException, TypeMismatchException  {
         logger.debug("Request for city {}", cityName);
         PlaylistResponse tracks = trackSuggestionService.suggestTracks(cityName);
+
+        if (tracks == null || ArrayUtils.isEmpty(tracks.getItems())) {
+            throw new NotFoundException("No tracks found");
+        }
         return tracks;
     }
 
@@ -48,9 +54,16 @@ public class PlaylistController {
                                                         @Valid
                                                             @Pattern(regexp = Patterns.COORDINATE_PATTERN_REGEX, message = INVALID_VALUE_MESSAGE)
                                                              @InRange(min = -180, max = 180)
-                                                            @RequestParam(value = "lon") float lon) throws NotFoundException, BadRequestException, NumberFormatException, TypeMismatchException {
+                                                            @RequestParam(value = "lon") float lon)
+                                                        throws NotFoundException, BadRequestException,
+                                                            NumberFormatException, TypeMismatchException  {
+
         logger.debug("Request for coordinates {}, {}", lat, lon);
         PlaylistResponse tracks = trackSuggestionService.suggestTracks(lat, lon);
+        if (tracks == null || ArrayUtils.isEmpty(tracks.getItems())) {
+            throw new NotFoundException("No tracks found");
+        }
+
         return tracks;
     }
 }
