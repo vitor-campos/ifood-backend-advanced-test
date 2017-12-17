@@ -16,6 +16,7 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
+apply plugin: "jacoco"
 
 group = 'com.ifood.backend'
 version = '0.0.2-SNAPSHOT'
@@ -73,5 +74,13 @@ dependencies {
 dependencyManagement {
 	imports {
 		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+	}
+}
+
+test {
+	dependsOn 'cleanTest'
+	jacoco {
+		append = false
+		destinationFile = file("$buildDir/test-results/test.exec")
 	}
 }
