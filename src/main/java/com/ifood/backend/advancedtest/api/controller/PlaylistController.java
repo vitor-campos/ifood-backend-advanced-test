@@ -24,6 +24,7 @@ public class PlaylistController {
 
     private static final Logger logger =
             LoggerFactory.getLogger(SpotifyErrorDecoder.class);
+
     private static final String INVALID_VALUE_MESSAGE = "Invalid value";
 
     @Autowired
