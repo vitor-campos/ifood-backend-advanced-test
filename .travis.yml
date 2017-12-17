@@ -10,3 +10,12 @@ cache:
   directories:
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
+
+addons:
+  sonarcloud:
+    organization: "vitor-campos-github" # the key of the org you chose at step #3
+    token:
+      secure: 70f323ac3dc2b8271df3ab5be95333c14bbc0dd4 # encrypted value of your token
+script:
+  # other script steps might be done before running the actual analysis
+  - sonar-scanner
