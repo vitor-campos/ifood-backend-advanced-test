@@ -6,7 +6,7 @@ import com.ifood.backend.advancedtest.service.spotify.*;
 import com.ifood.backend.advancedtest.service.spotify.client.SpotifyAuthApiClient;
 import com.ifood.backend.advancedtest.service.spotify.client.SpotifyPlaylistApiClient;
 import com.ifood.backend.advancedtest.util.ApiClient;
-import com.ifood.backend.advancedtest.service.spotify.interceptor.ResponseInterceptor;
+import com.ifood.backend.advancedtest.service.spotify.interceptor.CustomResponseInterceptor;
 import feign.Contract;
 import feign.Logger;
 import feign.Request;
@@ -68,7 +68,7 @@ public class SpotifyServiceConfiguration {
     public Decoder getDecoder() {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.registerModule(new JavaTimeModule());
-        return new ResponseInterceptor(objectMapper);
+        return new CustomResponseInterceptor(objectMapper);
     }
 
     @Bean

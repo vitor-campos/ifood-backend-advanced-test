@@ -71,15 +71,55 @@ public class Weather {
     }
 
     public class MainInfo {
-        public int id;
-        public float temp;
-        public float pressure;
+        private int id;
+        private float temp;
+        private float pressure;
 
         @JsonProperty("temp_min")
-        public float tempMin;
+        private float tempMin;
 
         @JsonProperty("temp_max")
-        public float tempMax;
+        private float tempMax;
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        public float getTemp() {
+            return temp;
+        }
+
+        public void setTemp(float temp) {
+            this.temp = temp;
+        }
+
+        public float getPressure() {
+            return pressure;
+        }
+
+        public void setPressure(float pressure) {
+            this.pressure = pressure;
+        }
+
+        public float getTempMin() {
+            return tempMin;
+        }
+
+        public void setTempMin(float tempMin) {
+            this.tempMin = tempMin;
+        }
+
+        public float getTempMax() {
+            return tempMax;
+        }
+
+        public void setTempMax(float tempMax) {
+            this.tempMax = tempMax;
+        }
 
         @Override
         public String toString() {

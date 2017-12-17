@@ -13,9 +13,9 @@ cache:
 
 addons:
   sonarcloud:
-    organization: "vitor-campos-github" # the key of the org you chose at step #3
+    organization: "vitor-campos-github"
     token:
-      secure: 70f323ac3dc2b8271df3ab5be95333c14bbc0dd4 # encrypted value of your token
+      secure: 70f323ac3dc2b8271df3ab5be95333c14bbc0dd4
 script:
   # other script steps might be done before running the actual analysis
   - sonar-scanner

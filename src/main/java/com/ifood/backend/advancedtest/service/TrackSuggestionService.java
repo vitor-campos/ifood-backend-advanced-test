@@ -38,18 +38,19 @@ public class TrackSuggestionService {
 
     public PlaylistResponse findTracksByWeather(Weather weather){
         Category category;
-        logger.debug("Selecting playlist according to temperature: {}", weather.getMain().temp);
-        if (weather.getMain().temp >= 30) {
+        float temp = weather.getMain().getTemp();
+        logger.debug("Selecting playlist according to temperature: {}", temp);
+        if (temp >= 30) {
             category = Category.PARTY;
-        } else if (weather.getMain().temp >= 15 && weather.getMain().temp < 30) {
+        } else if (temp >= 15 && temp < 30) {
             category = Category.POP;
-        } else if (weather.getMain().temp >= 10 && weather.getMain().temp < 15) {
+        } else if (temp >= 10 && temp < 15) {
             category = Category.ROCK;
         } else {
             category = Category.CLASSICAL;
         }
 
-        logger.debug("Selected playlist {} to temperature: {}", category, weather.getMain().temp);
+        logger.debug("Selected playlist {} to temperature: {}", category, temp);
 
         return spotifyPlaylistApiClient.getPlayList("spotify", category.getPlaylistId());
     }

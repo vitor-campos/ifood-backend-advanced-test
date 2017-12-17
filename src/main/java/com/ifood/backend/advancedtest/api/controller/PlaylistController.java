@@ -35,8 +35,7 @@ public class PlaylistController {
     @ResponseStatus(HttpStatus.OK)
     public @ResponseBody PlaylistResponse searchByCityName(@Valid
                                                            @RequestParam(value = "city") String cityName)
-                                                            throws NotFoundException, BadRequestException,
-                                                                    NumberFormatException, TypeMismatchException  {
+                                                            throws NotFoundException {
         logger.debug("Request for city {}", cityName);
         PlaylistResponse tracks = trackSuggestionService.suggestTracks(cityName);
 
@@ -55,8 +54,7 @@ public class PlaylistController {
                                                             @Pattern(regexp = Patterns.COORDINATE_PATTERN_REGEX, message = INVALID_VALUE_MESSAGE)
                                                              @InRange(min = -180, max = 180)
                                                             @RequestParam(value = "lon") float lon)
-                                                        throws NotFoundException, BadRequestException,
-                                                            NumberFormatException, TypeMismatchException  {
+                                                        throws NotFoundException {
 
         logger.debug("Request for coordinates {}, {}", lat, lon);
         PlaylistResponse tracks = trackSuggestionService.suggestTracks(lat, lon);

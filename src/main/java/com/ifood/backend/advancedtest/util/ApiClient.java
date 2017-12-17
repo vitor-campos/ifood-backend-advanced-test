@@ -24,7 +24,7 @@ public class ApiClient {
     }
 
     public <T extends ApiClient.Api> T buildClient(Class<T> clientClass) {
-        return (T) this.feignBuilder.target(clientClass, this.basePath);
+        return this.feignBuilder.target(clientClass, this.basePath);
     }
 
     public interface Api {

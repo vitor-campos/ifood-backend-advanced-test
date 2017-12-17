@@ -1,12 +1,12 @@
 package com.ifood.backend.advancedtest.service.spotify;
 
 
-import com.ifood.backend.advancedtest.service.spotify.interceptor.RequestInterceptor;
+import com.ifood.backend.advancedtest.service.spotify.interceptor.CustomRequestInterceptor;
 import feign.RequestTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
-public class SpotifyRequestInterceptor extends RequestInterceptor {
+public class SpotifyRequestInterceptor extends CustomRequestInterceptor {
 
     public static final String AUTHORIZATION_PARAMETER = "Authorization";
 

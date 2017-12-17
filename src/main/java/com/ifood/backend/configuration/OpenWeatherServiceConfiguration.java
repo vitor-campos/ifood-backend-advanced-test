@@ -51,7 +51,6 @@ public class OpenWeatherServiceConfiguration {
         apiClient.getFeignBuilder().options(new Request.Options(spotifyTimeout, spotifyTimeout));
         apiClient.getFeignBuilder().logger(new Slf4jLogger());
         apiClient.getFeignBuilder().logLevel(Logger.Level.FULL);
-        //apiClient.getFeignBuilder().errorDecoder(new OpenWeatherErrorDecoder());
         apiClient.getFeignBuilder().requestInterceptor(getRequestInterceptor());
         return apiClient;
     }

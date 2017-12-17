@@ -25,7 +25,7 @@ public class GlobalControllerExceptionHandler {
             LoggerFactory.getLogger(SpotifyErrorDecoder.class);
 
     @ExceptionHandler(value = Exception.class)
-    public ResponseEntity defaultErrorHandler(Exception e) throws GeneralException {
+    public ResponseEntity defaultErrorHandler(Exception e) {
         Set<String> messages = new HashSet<>();
         messages.add(e.getMessage());
         logger.error("Unexpected error [{}]",e.getMessage(), e);
@@ -36,7 +36,7 @@ public class GlobalControllerExceptionHandler {
     }
 
     @ExceptionHandler(value = PlaylistClientException.class)
-    public ResponseEntity handleClientException(PlaylistClientException e) throws PlaylistClientException {
+    public ResponseEntity handleClientException(PlaylistClientException e) {
         Set<String> messages = new HashSet<>();
         messages.add(e.getMessage());
         logger.error("Client error [{}]",e.getMessage(), e);
@@ -47,7 +47,7 @@ public class GlobalControllerExceptionHandler {
     }
 
     @ExceptionHandler(value = PlaylistServerException.class)
-    public ResponseEntity handleServerException(PlaylistServerException e) throws PlaylistServerException {
+    public ResponseEntity handleServerException(PlaylistServerException e){
         Set<String> messages = new HashSet<>();
         messages.add(e.getMessage());
         logger.error("Server error [{}]",e.getMessage(), e);
