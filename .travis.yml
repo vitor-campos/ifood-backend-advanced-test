@@ -1,0 +1,23 @@
+language: java
+
+jdk:
+  - oraclejdk8
+
+before_cache:
+  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+  - export SONAR_GITHUB_TOKEN="70f323ac3dc2b8271df3ab5be95333c14bbc0dd4"
+cache:
+  directories:
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
+
+addons:
+  sonarcloud:
+    organization: "vitor-campos-github"
+    token:
+      secure: 70f323ac3dc2b8271df3ab5be95333c14bbc0dd4
+
+script:
+  # other script steps might be done before running the actual analysis
+  - ./gradlew sonarqube
