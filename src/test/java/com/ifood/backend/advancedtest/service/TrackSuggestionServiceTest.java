@@ -70,7 +70,7 @@ public class TrackSuggestionServiceTest {
     private Weather mockWeather(float temperature) {
         Weather weather = new Weather();
         Weather.MainInfo mainInfo = weather.new MainInfo();
-        mainInfo.temp = temperature;
+        mainInfo.setTemp(temperature);
         weather.setMain(mainInfo);
         return weather;
     }
