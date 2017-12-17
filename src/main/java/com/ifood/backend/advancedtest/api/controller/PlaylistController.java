@@ -9,7 +9,6 @@ import com.ifood.backend.advancedtest.service.spotify.SpotifyErrorDecoder;
 import org.apache.commons.lang.ArrayUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.TypeMismatchException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Pattern;
-import javax.ws.rs.BadRequestException;
 
 @RestController
 @RequestMapping("/playlist")
