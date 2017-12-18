@@ -21,3 +21,10 @@ addons:
 script:
   # other script steps might be done before running the actual analysis
   - ./gradlew sonarqube
+
+
+deploy:
+  provider: heroku
+  api_key: 7402e1c1-6244-44e4-98ab-d415ccb29663
+  app: ifood-backend-test-vc
+  on: master
