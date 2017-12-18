@@ -14,6 +14,7 @@
  - Travis CI
  - SonarQube Cloud
  - Docker
+ - Heroku
 
 ## Considerations:
 ### OpenWeather service
@@ -114,3 +115,15 @@
   ```http
   http://localhost:8080/swagger-ui.html
    ```
+   
+ __Deployed Application__
+  1. Test Rest Api
+   ```http
+   https://ifood-backend-test-vc.herokuapp.com/playlist?city=Salvador
+   https://ifood-backend-test-vc.herokuapp.com/playlist?lat=-30.2&lon=-5.3
+   ```
+   
+   2. Swagger docs
+   ```http
+   https://ifood-backend-test-vc.herokuapp.com/swagger-ui.html
+    ```
