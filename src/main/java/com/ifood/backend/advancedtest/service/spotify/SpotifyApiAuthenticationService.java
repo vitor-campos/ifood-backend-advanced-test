@@ -22,7 +22,7 @@ public class SpotifyApiAuthenticationService {
     @Autowired
     private CacheManager cacheManager;
 
-    @Cacheable(cacheNames = CACHE_KEY, key = "#root.target.CACHE_KEY")
+    @Cacheable(cacheManager = "default", cacheNames = CACHE_KEY, key = "#root.target.CACHE_KEY")
     public String getSpotifyAuthToken() {
         final Map<String, String> response = spotifyAuthApiClient.authorizeUsingPOST(GRANT_TYPE);
         return response.get(ACCESS_TOKEN_ATTRIBUTE);

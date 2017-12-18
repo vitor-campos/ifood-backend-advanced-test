@@ -27,3 +27,13 @@ feign:
 
 logging:
   level: DEBUG
+
+spring:
+  cache:
+    type: redis
+    host: localhost
+    port: 6379
+
+cacheManager:
+  strategy: redis
+  defaultCacheExpireTime: 86400 #24 horas
