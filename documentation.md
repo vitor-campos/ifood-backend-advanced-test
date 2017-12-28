@@ -62,7 +62,7 @@
    This project provides a centralized error handling based in ControllerAdvice. It's used to catch some kinds of error and customize the response.
    
    __Class com.ifood.backend.advancedtest.exception.GlobalControllerExceptionHandler__
-## Possible Iprovements
+## Possible Improvements
   - Increase unit test coverage
   - Implement integrated tests
   - Add Hystrix circuit breaker to improve fault tolerance
