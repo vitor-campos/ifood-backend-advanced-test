@@ -11,6 +11,10 @@
  - Swagger and Swagger UI
  - PowerMock and Mockito
  - Logback
+ - Travis CI
+ - SonarQube Cloud
+ - Docker
+ - Heroku
 
 ## Considerations:
 ### OpenWeather service
@@ -58,7 +62,7 @@
    This project provides a centralized error handling based in ControllerAdvice. It's used to catch some kinds of error and customize the response.
    
    __Class com.ifood.backend.advancedtest.exception.GlobalControllerExceptionHandler__
-## Possible Iprovements
+## Possible Improvements
   - Increase unit test coverage
   - Implement integrated tests
   - Add Hystrix circuit breaker to improve fault tolerance
@@ -68,7 +72,7 @@
 
 ## Setup and Usage:
 ### Configuration
-  1. Update configurations in src/main/resources/application.yml
+   __Update configurations in src/main/resources/application.yml__
   
   ```javascript
   security:
@@ -89,24 +93,37 @@
       uri: https://api.spotify.com
       timeout: 5000
   ```
+  __Build Locally__
   
-  2. Build docker image
+  1. Build docker image
   ```bash
     ./gradlew build docker
   ```
   
-  3. Start docker container
+  2. Start docker container
   ```bash
-      ./docker run -p 8080:8080 -t com.ifood.backend/ifood-backend-advanced-test
+      docker run -p 8080:8080 -t com.ifood.backend/ifood-backend-advanced-test
   ```
   
-  4. Test Rest Api
+  3. Test Rest Api
   ```http
   http://localhost:8080/playlist?city=Salvador
   http://localhost:8080/playlist?lat=-30.2&lon=-5.3
   ```
   
-  5. Swagger docs
+  4. Swagger docs
   ```http
   http://localhost:8080/swagger-ui.html
    ```
+   
+ __Deployed Application__
+  1. Test Rest Api
+   ```http
+   https://ifood-backend-test-vc.herokuapp.com/playlist?city=Salvador
+   https://ifood-backend-test-vc.herokuapp.com/playlist?lat=-30.2&lon=-5.3
+   ```
+   
+   2. Swagger docs
+   ```http
+   https://ifood-backend-test-vc.herokuapp.com/swagger-ui.html
+    ```
